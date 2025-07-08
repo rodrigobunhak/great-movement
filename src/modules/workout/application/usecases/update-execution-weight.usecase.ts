@@ -1,15 +1,15 @@
-import { Execution } from "../entities/execution/execution.entity";
+import { Execution } from "../../domain/entities/execution/execution.entity";
 
 export class UpdateExecutionWeightUseCase {
   constructor(private readonly executionRepository: ExecutionRepository) {}
 
   public execute(input: Input): Output {
     const execution = this.executionRepository.getById(input.executionId);
-    execution.setWeight(input.weight);
+    execution.updateWeightAmount(input.weight);
     this.executionRepository.update(execution);
     return {
-      executionId: execution.getId(),
-      weight: execution.getWeight(),
+      executionId: execution.id.value,
+      weight: execution.weightAmount,
     }
   }
 }

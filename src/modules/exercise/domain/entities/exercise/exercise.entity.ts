@@ -1,27 +1,27 @@
-import { Image } from "../../workout/vos/image.vo.ts";
+import { Id } from "../../../../@shared/vos/id.vo";
 
 // Entidade Exercise
 export class Exercise {
-  private readonly _id: string; // Converter para um VO de id
+  private readonly _id: Id;
   private _name: string;
   private _description: string;
   private _focusArea: string;
-  private _images: Image[];
+  // private _images: Image[];
   private readonly _createdAt: Date;
 
   private constructor(
-    id: string,
+    id: Id,
     name: string,
     description: string,
     focusArea: string,
-    images: Image[],
+    // images: Image[],
     createdAt: Date,
   ) {
     this._id = id;
     this._name = name;
     this._description = description;
     this._focusArea = focusArea;
-    this._images = images;
+    // this._images = images;
     this._createdAt = createdAt;
   }
 
@@ -37,14 +37,14 @@ export class Exercise {
     if (!focusArea || focusArea.trim().length === 0) {
       throw new Error('Foco do exercício é obrigatório');
     }
-    const id = '123';
+    const id = new Id('123');
     const createdAt = new Date();
-    const imageObjects = images.map(image => new Image(image.url, image.altText));
-    return new Exercise(id, name.trim(), description.trim(), focusArea.trim(), imageObjects, createdAt);
+    // const imageObjects = images.map(image => new Image(image.url, image.altText));
+    return new Exercise(id, name.trim(), description.trim(), focusArea.trim(), createdAt);
   }
 
   // Getters
-  public get id(): string {
+  public get id(): Id {
     return this._id;
   }
 
@@ -60,9 +60,9 @@ export class Exercise {
     return this._focusArea;
   }
 
-  public get images(): Image[] {
-    return this._images;
-  }
+  // public get images(): Image[] {
+  //   return this._images;
+  // }
 
   public get createdAt(): Date {
     return this._createdAt;
@@ -87,11 +87,11 @@ export class Exercise {
     this._focusArea = focusArea.trim();
   }
 
-  addImage(image: Image): void {
-    this._images.push(image);
-  }
+  // addImage(image: Image): void {
+  //   this._images.push(image);
+  // }
 
-  removeImage(imageUrl: string): void {
-    this._images = this._images.filter(image => image.url !== imageUrl);
-  }
+  // removeImage(imageUrl: string): void {
+  //   this._images = this._images.filter(image => image.url !== imageUrl);
+  // }
 }

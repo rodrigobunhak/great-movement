@@ -11,4 +11,8 @@ export class Id {
   get value() {
     return this.id;
   }
+
+  equals(id: Id): boolean {
+    return this.id === id.value;
+  }
 }
