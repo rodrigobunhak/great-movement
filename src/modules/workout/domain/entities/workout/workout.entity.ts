@@ -59,6 +59,7 @@ export class Workout {
   }
 
   public finish(): void {
+    if (!this._startedAt) throw new Error('Workout has not been started yet');
     this._finishedAt = new Date();
   }
 
