@@ -93,6 +93,13 @@ export class Execution {
     this._repetitionAmount = amount;
   }
 
+  public getDurationInSeconds(): number {
+    if (!this._startedAt) throw new Error('Execução não foi iniciada');
+    const endTime = this._completedAt || new Date();
+    const durationMs = endTime.getTime() - this._startedAt.getTime();
+    return Math.floor(durationMs / 1000);
+  }  
+
   public toObject() {
     return {
       id: this._id.value,
