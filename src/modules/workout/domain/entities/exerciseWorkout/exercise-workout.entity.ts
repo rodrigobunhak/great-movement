@@ -1,5 +1,6 @@
 import { Id } from "src/modules/@shared/vos/id.vo";
 import { Execution } from "../execution/execution.entity";
+import { randomUUID } from "crypto";
 
 export class ExerciseWorkout {
   private readonly _id: Id;
@@ -14,7 +15,7 @@ export class ExerciseWorkout {
 
   static create(props: ExerciseCreateProps): ExerciseWorkout {
     return new ExerciseWorkout({
-      id: new Id('123'),
+      id: new Id(),
       exerciseId: props.exerciseId,
       executions: [],
     });
@@ -47,6 +48,18 @@ export class ExerciseWorkout {
 
   public removeExecution(executionId: Id): void {
     this._executions = this._executions.filter(execution => !execution.id.equals(executionId));
+  }
+
+  public toObject() {
+    return {
+      id: this._id.value,
+      exerciseId: this._exerciseId.value,
+      executions: this._executions.map(e => e.toObject()),
+    };
+  }
+
+  public toJSON() {
+    return this.toObject();
   }
 }
 

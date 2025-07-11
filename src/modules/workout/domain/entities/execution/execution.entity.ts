@@ -20,7 +20,7 @@ export class Execution {
 
   static create(props: ExecutionCreateProps): Execution {
     return new Execution({
-      id: new Id('123'),
+      id: new Id(),
       weightAmount: props.weightAmount,
       repetitionAmount: props.repetitionAmount,
       status: 'not_started',
@@ -91,6 +91,21 @@ export class Execution {
       throw new Error('Quantidade não permitida');
     }
     this._repetitionAmount = amount;
+  }
+
+  public toObject() {
+    return {
+      id: this._id.value,
+      weightAmount: this._weightAmount,
+      repetitionAmount: this._repetitionAmount,
+      status: this._status,
+      startedAt: this._startedAt,
+      completedAt: this._completedAt,
+    };
+  }
+
+  public toJSON() {
+    return this.toObject();
   }
 }
 

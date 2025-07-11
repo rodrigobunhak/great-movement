@@ -21,7 +21,7 @@ export class Workout {
       throw new Error('Nome do treino é obrigatório');
     }
     return new Workout({
-      id: new Id('123'),
+      id: new Id(),
       name: props.name.trim(),
       execiseWorkouts: [],
     });
@@ -45,6 +45,20 @@ export class Workout {
 
   public get exerciseWorkouts(): ExerciseWorkout[] {
     return this._execiseWorkouts;
+  }
+
+  public toObject() {
+    return {
+      id: this._id.value,
+      name: this._name,
+      startedAt: this._startedAt,
+      finishedAt: this._finishedAt,
+      exerciseWorkouts: this._execiseWorkouts.map(ew => ew.toObject()),
+    };
+  }
+
+  public toJSON() {
+    return this.toObject();
   }
 
   public updateName(name: string): void {
